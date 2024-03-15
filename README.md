@@ -2,7 +2,6 @@
 
 Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with a Blog, CV, Project Section, Store, and RSS Feed.
 
-
 ## Installation
 
 Run the following command in your terminal
@@ -119,7 +118,7 @@ The timeline components are used to confirm the CV.
 
 #### Card & HorizontalCard
 
-The cards are primarly used for the Project and the Blog components. They include a picture, a title, and a description. 
+The cards are primarly used for the Project and the Blog components. They include a picture, a title, and a description.
 
 ```html
 <HorizontalCard title="Card Title" img="imge_url" desc="Description" url="Link
@@ -128,7 +127,6 @@ tags={['Array','of','tags']} />
 ```
 
 #### HorizontalCard Shop Item
-
 
 This component is already included in the Store layout of the template. In case you want to use it in another place these are the props.
 
@@ -150,26 +148,27 @@ This component is already included in the Store layout of the template. In case 
 
 #### Adding a Custom Component
 
-To add a custom component, you can create a .astro file in the components folder under the source folder. 
+To add a custom component, you can create a .astro file in the components folder under the source folder.
 
-Components must follow this template. The ```---``` represents the code fence and uses Javascript and can be used for imports. 
+Components must follow this template. The `---` represents the code fence and uses Javascript and can be used for imports.
 
-The HTML component is the actual style of your new component. 
+The HTML component is the actual style of your new component.
 
 ```html
 ---
 // Component Script (JavaScript)
 ---
+
 <!-- Component Template (HTML + JS Expressions) -->
 ```
 
-For more details, see the [astro components](https://docs.astro.build/en/core-concepts/astro-components/) documentation here. 
+For more details, see the [astro components](https://docs.astro.build/en/core-concepts/astro-components/) documentation here.
 
 ### Layouts
 
 Include `BaseLayout` in each page you add and `PostLayout` to your post pages.
 
-The BaseLayout defines a general template for each new webpage you want to add. It imports constants SITE_TITLE and SITE_DESCRIPTION which can be modified in the ```../config``` folder. Data placed there can be imported anywhere using import. 
+The BaseLayout defines a general template for each new webpage you want to add. It imports constants SITE_TITLE and SITE_DESCRIPTION which can be modified in the `../config` folder. Data placed there can be imported anywhere using import.
 
 ### Content
 
@@ -256,9 +255,6 @@ The Sitemap is generated automatically when you build your website in the root o
 
 ## Deploy
 
-You can deploy your site on your favourite static hosting service such as Vercel, Netlify, GitHub Pages, etc.
+This site is hosted on S3. To update build and copy `dist/` to the S3 bucket.
 
-The configuration for the deployment varies depending on the platform where you are going to do it. See the [official Astro information](https://docs.astro.build/en/guides/deploy/) to deploy your website.
-
-> **⚠️ CAUTION** </br>
-> The Blog pagination of this template is implemented using dynamic route parameters in its filename and for now this format is incompatible with SSR deploy configs, so please use the default static deploy options for your deployments.
+`aws s3 cp dist/ s3://curtisrubeck.com/ --recursive`

@@ -2,9 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
+import createSlug from "../lib/createSlug";
 
-const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
 const last_posts = posts.slice(0, 3);
 ---
@@ -16,59 +18,51 @@ const last_posts = posts.slice(0, 3);
     <div class="text-3xl py-3 font-bold">DevOps Engineer and Tech Nerd</div>
     <div class="py-2">
       <text class="text-lg">
-        <b>DevOps Engineer</b> who loves using technology to solve problems.
-        I enjoy exploring new ideas and making solutions simple and straightforward!
+        <b>DevOps Engineer</b> dedicated to leveraging technology to tackle complex
+        business problems head-on, striving to find innovative solutions that drive
+        efficiency and success.
       </text>
+      <div class="mt-8">
+        <a
+          class="btn"
+          href="https://www.linkedin.com/in/curtis-rubeck/"
+          target="_blank"
+        >
+          Let's connect!</a
+        >
+      </div>
     </div>
-    <div class="mt-8">
-      <a class="btn" href="https://www.linkedin.com/in/curtis-rubeck/" target="_blank"> Let's connect!</a>
+    <div>
+      <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
     </div>
+
+    <HorizontalCard
+      title="Expense Tracker"
+      img="/post_img.webp"
+      desc="Expense Tracker simplifies the management of your finances by effortlessly monitoring and organizing your expenses, helping you stay on top of your spending habits."
+      url="https://github.com/curtrube/expense-tracker"
+      badge="Coming Soon"
+    />
+    <div class="divider my-0"></div>
+
+    <div>
+      <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+    </div>
+
+    {
+      last_posts.map((post) => (
+        <>
+          <HorizontalCard
+            title={post.data.title}
+            img={post.data.heroImage}
+            desc={post.data.description}
+            url={"/blog/" + createSlug(post.data.title, post.slug)}
+            target="_self"
+            badge={post.data.badge}
+          />
+          <div class="divider my-0" />
+        </>
+      ))
+    }
   </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
-  </div>
-
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
-
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
 </BaseLayout>
